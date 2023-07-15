@@ -4,7 +4,6 @@ import Typography from '@mui/material/Typography'
 import Head from 'next/head'
 
 export default function Home() {
-  console.log(process.env.NEXT_PUBLIC_FIREBASE_API_KEY)
   return (
     <>
       <Head>
