@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography'
 import Head from 'next/head'
 
 export default function Home() {
+  console.log(process.env.NEXT_PUBLIC_FIREBASE_API_KEY)
   return (
     <>
       <Head>
@@ -16,14 +17,12 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Box
-        sx={
-          {
-            // pt: 4,
-            // px: 1,
-            // display: 'flex',
-            // justifyContent: 'center'
-          }
-        }
+        sx={{
+          pt: 4
+          // px: 1,
+          // display: 'flex',
+          // justifyContent: 'center'
+        }}
       >
         <Stack>
           <Typography variant='h2' textAlign='center'>
