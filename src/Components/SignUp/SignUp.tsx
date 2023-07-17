@@ -2,7 +2,7 @@ import { ReactElement } from 'react'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
-import Link from '@mui/material/Link'
+import Link from 'next/link'
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
@@ -86,8 +86,10 @@ export function SignUp(): ReactElement {
         >
           Sign Up
         </Button>
-        <Link href='#' variant='body2'>
-          Already have an account? Sign in
+        <Link href='/user/signin'>
+          <Typography variant='body2'>
+            {'Already have an account? Sign in'}
+          </Typography>
         </Link>
       </Box>
     </Box>

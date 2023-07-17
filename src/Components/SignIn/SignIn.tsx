@@ -7,8 +7,8 @@ import TextField from '@mui/material/TextField'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Button from '@mui/material/Button'
 import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link'
 import Checkbox from '@mui/material/Checkbox'
+import Link from 'next/link'
 
 export function SignIn() {
   const handleSubmit = () => {
@@ -69,14 +69,11 @@ export function SignIn() {
           Sign In
         </Button>
         <Grid container>
-          <Grid item xs>
-            <Link href='#' variant='body2'>
-              Forgot password?
-            </Link>
-          </Grid>
           <Grid item>
-            <Link href='#' variant='body2'>
-              {"Don't have an account? Sign Up"}
+            <Link href='/user/signup'>
+              <Typography variant='body2'>
+                {"Don't have an account? Sign Up"}
+              </Typography>
             </Link>
           </Grid>
         </Grid>
