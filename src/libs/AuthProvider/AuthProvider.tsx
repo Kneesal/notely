@@ -7,7 +7,14 @@ import {
   useEffect
 } from 'react'
 import { auth } from '../firebaseConfig/'
-import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
+import {
+  Auth,
+  UserCredential,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut
+} from 'firebase/auth'
 
 interface AuthProviderProps {
   children: ReactNode
@@ -17,7 +24,15 @@ interface User {
   uid: string | null
 }
 
-const AuthContext = createContext({})
+interface Context {
+  user: User
+  loading: boolean
+  logIn: (email: string, password: string) => Promise<UserCredential>
+  createUser: (email: string, password: string) => Promise<UserCredential>
+  logOut: (auth: Auth) => Promise<void>
+}
+
+const AuthContext = createContext({} as unknown as Context)
 
 export function AuthProvider({ children }: AuthProviderProps): ReactElement {
   const [user, setUser] = useState<User>({ email: null, uid: null })
@@ -39,17 +54,26 @@ export function AuthProvider({ children }: AuthProviderProps): ReactElement {
     return () => unsubscribe()
   }, [])
 
+  async function logIn(email: string, password: string) {
+    return signInWithEmailAndPassword(auth, email, password)
+  }
+
+  async function createUser(email: string, password: string) {
+    return createUserWithEmailAndPassword(auth, email, password)
+  }
+
+  async function logOut() {
+    setUser({ email: null, uid: null })
+    await signOut(auth)
+  }
+
   return (
-    <AuthContext.Provider value={{ user, loading }}>
+    <AuthContext.Provider value={{ user, loading, logIn, createUser, logOut }}>
       {children}
     </AuthContext.Provider>
   )
 }
 
-export function useAuth() {
+export function useAuth(): Context {
   return useContext(AuthContext)
-}
-
-function signIn(email: string, password: string) {
-  return signInWithEmailAndPassword(auth, email, password)
 }
