@@ -7,10 +7,11 @@ import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
+import { useAuth } from '@/libs/AuthProvider/AuthProvider'
 
 export function SignUp(): ReactElement {
   const handleSubmit = () => {
-    console.log('submitted')
+    console.log('submitted signup form')
   }
 
   return (
