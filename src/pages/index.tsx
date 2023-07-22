@@ -2,8 +2,10 @@ import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import Head from 'next/head'
+import { withUser, AuthAction } from 'next-firebase-auth'
+import { SignIn } from '@/Components/SignIn'
 
-export default function Home() {
+function Home() {
   return (
     <>
       <Head>
@@ -32,3 +34,8 @@ export default function Home() {
     </>
   )
 }
+
+export default withUser({
+  whenUnauthedBeforeInit: AuthAction.REDIRECT_TO_LOGIN,
+  authPageURL: '/user/signin'
+})(Home)
