@@ -24,8 +24,8 @@ const initAuth = () => {
     firebaseClientInitConfig: {
       apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY ?? '',
       authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN ?? '',
-      databaseURL: 'https://my-example-app.firebaseio.com',
-      projectId: 'my-example-app-id'
+      databaseURL: '',
+      projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
     },
 
     cookies: {
@@ -35,11 +35,11 @@ const initAuth = () => {
         process.env.COOKIE_SECRET_PREVIOUS
       ],
       httpOnly: true,
-      maxAge: 12 * 60 * 60 * 24 * 1000, // twelve days
+      maxAge: 1 * 60 * 60 * 24 * 1000, // one day
       overwrite: true,
       path: '/',
       sameSite: 'strict',
-      secure: true, // set this to false in local (non-HTTPS) development
+      secure: process.env.NODE_ENV === 'production', // set this to false in local (non-HTTPS) development
       signed: true
     },
     onVerifyTokenError: (err: Error) => {

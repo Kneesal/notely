@@ -2,8 +2,7 @@ import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import Head from 'next/head'
-import { withUser, AuthAction } from 'next-firebase-auth'
-import { SignIn } from '@/Components/SignIn'
+import { withUser, AuthAction, withUserTokenSSR } from 'next-firebase-auth'
 
 function Home() {
   return (
@@ -35,7 +34,10 @@ function Home() {
   )
 }
 
+export const getServerSideProps = withUserTokenSSR({
+  whenUnauthed: AuthAction.REDIRECT_TO_LOGIN
+})()
+
 export default withUser({
-  whenUnauthedBeforeInit: AuthAction.REDIRECT_TO_LOGIN,
-  authPageURL: '/user/signin'
+  whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN
 })(Home)
