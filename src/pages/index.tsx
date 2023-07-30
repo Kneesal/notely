@@ -3,6 +3,7 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import Head from 'next/head'
 import { withUser, AuthAction, withUserTokenSSR } from 'next-firebase-auth'
+import { UserAvatar } from '@/Components/UserAvatar'
 
 function Home() {
   return (
@@ -18,13 +19,14 @@ function Home() {
       </Head>
       <Box
         sx={{
-          pt: 4
-          // px: 1,
-          // display: 'flex',
-          // justifyContent: 'center'
+          pt: 4,
+          px: 1,
+          display: 'flex',
+          justifyContent: 'center'
         }}
       >
-        <Stack>
+        <UserAvatar></UserAvatar>
+        <Stack direction='column'>
           <Typography variant='h2' textAlign='center'>
             Our Shopping List
           </Typography>

@@ -19,17 +19,16 @@ export function SignIn(): ReactElement {
   }, [])
 
   const uiConfig = {
-    // Popup signin flow rather than redirect flow.
     signInFlow: 'popup',
-    // We will display Google and Facebook as auth providers.
     signInOptions: [
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebase.auth.FacebookAuthProvider.PROVIDER_ID
+      firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID
     ],
     callbacks: {
       signInSuccessWithAuthResult: () =>
         // Don't automatically redirect. We handle redirects using
         // `next-firebase-auth`.
+        //see pages/user/signin.tsx for example of our redirection
         false
     }
   }
