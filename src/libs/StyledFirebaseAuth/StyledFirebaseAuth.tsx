@@ -4,14 +4,8 @@ import 'firebaseui/dist/firebaseui.css'
 import { auth } from 'firebaseui'
 
 interface StyledFirebaseAuthProps {
-  // The Firebase UI Web UI Config object.
-  // See: https://github.com/firebase/firebaseui-web#configuration
   uiConfig: auth.Config
-  // Callback that will be passed the FirebaseUi instance before it is
-  // started. This allows access to certain configuration options such as
-  // disableAutoSignIn().
   uiCallback?(ui: auth.AuthUI): void
-  // The Firebase App auth instance to use.
   firebaseAuth: any // As firebaseui-web
   className?: string
 }
