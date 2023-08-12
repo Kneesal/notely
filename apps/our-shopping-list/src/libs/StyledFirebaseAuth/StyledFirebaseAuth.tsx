@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
-import { onAuthStateChanged } from 'firebase/auth'
+import { Auth, onAuthStateChanged } from 'firebase/auth'
 import 'firebaseui/dist/firebaseui.css'
 import { auth } from 'firebaseui'
 
 interface StyledFirebaseAuthProps {
   uiConfig: auth.Config
   uiCallback?(ui: auth.AuthUI): void
-  firebaseAuth: any // As firebaseui-web
+  firebaseAuth: Auth // As firebaseui-web
   className?: string
 }
 
@@ -48,16 +48,13 @@ export const StyledFirebaseAuth = ({
     if (uiCallback) uiCallback(firebaseUiWidget)
 
     // Render the firebaseUi Widget.
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    firebaseUiWidget.start(elementRef.current, uiConfig)
+    firebaseUiWidget.start(elementRef.current ?? '', uiConfig)
 
     return () => {
       unregisterAuthObserver()
       firebaseUiWidget.reset()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [firebaseui, uiConfig, userSignedIn])
+  }, [firebaseAuth, firebaseui, uiCallback, uiConfig, userSignedIn])
 
   return <div className={className} ref={elementRef} />
 }

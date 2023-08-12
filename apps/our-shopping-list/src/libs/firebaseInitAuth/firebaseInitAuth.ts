@@ -12,7 +12,6 @@ const initAuth = () => {
     onLogoutRequestError: (err: Error) => {
       console.error(err)
     },
-    debug: true,
     firebaseAdminInitConfig: {
       credential: {
         projectId: process.env.NEXT_PUBLIC_FIREBASE_ADMIN_PROJECT_ID ?? '',
