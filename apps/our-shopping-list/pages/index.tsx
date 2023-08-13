@@ -4,6 +4,8 @@ import Typography from '@mui/material/Typography'
 import Head from 'next/head'
 import { withUser, AuthAction, withUserTokenSSR } from 'next-firebase-auth'
 import { UserAvatar } from '../src/Components/UserAvatar'
+import { SharedList } from '../src/Components/SharedList'
+import { InputForm } from '../src/Components/InputForm'
 
 function Home() {
   return (
@@ -30,6 +32,8 @@ function Home() {
           <Typography variant='h2' textAlign='center'>
             Our Shopping List
           </Typography>
+          <SharedList />
+          <InputForm />
         </Stack>
       </Box>
     </>
