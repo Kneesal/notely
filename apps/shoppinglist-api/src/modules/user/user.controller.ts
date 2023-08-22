@@ -13,7 +13,6 @@ export class UsersController {
 
   @Post()
   create(@Body() input: User): Promise<User> {
-    console.log(input)
     return this.usersService.createUser(input)
   }
 
