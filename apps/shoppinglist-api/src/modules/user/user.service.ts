@@ -12,17 +12,22 @@ export class UsersService {
 
   async createUser(input: User): Promise<User> {
     const existingUser = await this.usersRepository.findOneBy({ id: input.id })
-    if (existingUser != null) return existingUser
+
+    if (existingUser != null) {
+      console.log('I made it here')
+      return existingUser
+    }
 
     const newUser = new User()
     newUser.id = input.id
     newUser.firstName = input.firstName
     newUser.lastName = input.lastName
     newUser.imageUrl = input.imageUrl
+    console.log('I made it here', newUser)
     return newUser
   }
 
-  findOne(id: string): Promise<User | null> {
+  async findOne(id: string): Promise<User | null> {
     return this.usersRepository.findOneBy({ id })
   }
 
