@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { UsersService } from './user.service'
 import { UsersController } from './user.controller'
+import { DeleteResult } from 'typeorm'
 // import { getRepositoryToken } from '@nestjs/typeorm'
 // import { User } from './user.entity'
 // import { Repository } from 'typeorm'
@@ -12,6 +13,12 @@ describe('UserController', () => {
     'createUser' | 'findOne' | 'remove'
   >
   //   let repository: Repository<User>
+  const mockUser = {
+    id: 'userId',
+    firstName: 'Joe',
+    lastName: 'Mama',
+    imageUrl: 'imageUrl'
+  }
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
@@ -33,14 +40,30 @@ describe('UserController', () => {
     usersService = app.get(UsersService)
     // repository = app.get<Repository<User>>(getRepositoryToken(User))
   })
-  it('shold get me if user existis in database', async () => {
-    const mockUser = {
-      id: '1',
-      firstName: 'joe',
-      lastName: 'mama',
-      imageUrl: 'someImageURL'
-    }
-    usersService.createUser.mockResolvedValueOnce(mockUser)
-    expect(await usersController.create(mockUser)).toEqual(mockUser)
+
+  describe('create()', () => {
+    it('should create new user', async () => {
+      usersService.createUser.mockResolvedValueOnce(mockUser)
+      expect(await usersController.create(mockUser)).toEqual(mockUser)
+      expect(usersService.createUser).toHaveBeenCalledWith(mockUser)
+    })
+  })
+
+  describe('findOne()', () => {
+    it('should create get me', async () => {
+      usersService.findOne.mockResolvedValueOnce(mockUser)
+      expect(await usersController.findOne('userId')).toEqual(mockUser)
+      expect(usersService.findOne).toHaveBeenCalledWith('userId')
+    })
+  })
+
+  describe('remove()', () => {
+    it('should remove user', async () => {
+      usersService.remove.mockResolvedValueOnce(
+        mockUser as unknown as DeleteResult
+      )
+      expect(await usersService.remove('userId')).toEqual(mockUser)
+      expect(await usersService.remove).toHaveBeenCalledWith('userId')
+    })
   })
 })
