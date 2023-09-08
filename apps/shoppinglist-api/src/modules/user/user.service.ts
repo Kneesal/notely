@@ -23,8 +23,7 @@ export class UsersService {
     newUser.firstName = input.firstName
     newUser.lastName = input.lastName
     newUser.imageUrl = input.imageUrl
-    console.log('I made it here', newUser)
-    return newUser
+    return this.usersRepository.save(newUser)
   }
 
   async findOne(id: string): Promise<User | null> {
