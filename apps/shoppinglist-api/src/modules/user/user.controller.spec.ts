@@ -2,9 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing'
 import { UsersService } from './user.service'
 import { UsersController } from './user.controller'
 import { DeleteResult } from 'typeorm'
-// import { getRepositoryToken } from '@nestjs/typeorm'
-// import { User } from './user.entity'
-// import { Repository } from 'typeorm'
 
 describe('UserController', () => {
   let usersController: UsersController
@@ -12,7 +9,7 @@ describe('UserController', () => {
     jest.MockedObject<UsersService>,
     'createUser' | 'findOne' | 'remove'
   >
-  //   let repository: Repository<User>
+
   const mockUser = {
     id: 'userId',
     firstName: 'Joe',
@@ -38,7 +35,6 @@ describe('UserController', () => {
 
     usersController = app.get<UsersController>(UsersController)
     usersService = app.get(UsersService)
-    // repository = app.get<Repository<User>>(getRepositoryToken(User))
   })
 
   describe('create()', () => {
@@ -63,7 +59,7 @@ describe('UserController', () => {
         mockUser as unknown as DeleteResult
       )
       expect(await usersService.remove('userId')).toEqual(mockUser)
-      expect(await usersService.remove).toHaveBeenCalledWith('userId')
+      expect(usersService.remove).toHaveBeenCalledWith('userId')
     })
   })
 })
