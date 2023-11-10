@@ -38,5 +38,55 @@ describe('UserController', () => {
       expect(result).toEqual(expectedResult)
       expect(repoSpy).toHaveBeenCalledWith({ id: entityId })
     })
+
+    it('should create new user if not already existing in database', async () => {
+      const newUser = {
+        id: '1',
+        firstName: 'john',
+        lastName: 'Doe',
+        imageUrl: 'imageURL.example'
+      }
+
+      const repoSpyFindByOne = jest
+        .spyOn(repository, 'findOneBy')
+        .mockResolvedValue(null)
+      const repoSpySave = jest
+        .spyOn(repository, 'save')
+        .mockResolvedValue(newUser)
+
+      const result = await usersService.createUser(newUser)
+      expect(result).toEqual(newUser)
+      expect(repoSpyFindByOne).toHaveBeenCalledWith({ id: newUser.id })
+      expect(repoSpySave).toHaveBeenCalledWith(newUser)
+    })
+
+    it('should return existing user on create if existing user exsits already', async () => {
+      const newUser = {
+        id: '1',
+        firstName: 'john',
+        lastName: 'Doe',
+        imageUrl: 'imageURL.example'
+      }
+
+      const repoSpyFindByOne = jest
+        .spyOn(repository, 'findOneBy')
+        .mockResolvedValue(newUser)
+
+      const result = await usersService.createUser(newUser)
+      expect(result).toEqual(newUser)
+      expect(repoSpyFindByOne).toHaveBeenCalledWith({ id: newUser.id })
+    })
+
+    it('should delete user', async () => {
+      const userToDelete = '1'
+
+      const repoSpyDelete = jest
+        .spyOn(repository, 'delete')
+        .mockResolvedValue({ raw: '1', affected: 1 })
+
+      const result = await usersService.remove(userToDelete)
+      expect(result).toEqual({ raw: '1', affected: 1 })
+      expect(repoSpyDelete).toHaveBeenCalledWith(userToDelete)
+    })
   })
 })

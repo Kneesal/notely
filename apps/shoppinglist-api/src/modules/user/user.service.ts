@@ -14,7 +14,6 @@ export class UsersService {
     const existingUser = await this.usersRepository.findOneBy({ id: input.id })
 
     if (existingUser != null) {
-      console.log('I made it here')
       return existingUser
     }
 
