@@ -77,21 +77,16 @@ describe('UserController', () => {
       expect(repoSpyFindByOne).toHaveBeenCalledWith({ id: newUser.id })
     })
 
-    it('should return existing user on create if existing user exsits already', async () => {
-      const newUser = {
-        id: '1',
-        firstName: 'john',
-        lastName: 'Doe',
-        imageUrl: 'imageURL.example'
-      }
+    it('should delete user', async () => {
+      const userToDelete = '1'
 
-      const repoSpyFindByOne = jest
-        .spyOn(repository, 'findOneBy')
-        .mockResolvedValue(newUser)
+      const repoSpyDelete = jest
+        .spyOn(repository, 'delete')
+        .mockResolvedValue({ raw: '1', affected: 1 })
 
-      const result = await usersService.createUser(newUser)
-      expect(result).toEqual(newUser)
-      expect(repoSpyFindByOne).toHaveBeenCalledWith({ id: newUser.id })
+      const result = await usersService.remove(userToDelete)
+      expect(result).toEqual({ raw: '1', affected: 1 })
+      expect(repoSpyDelete).toHaveBeenCalledWith(userToDelete)
     })
   })
 })
