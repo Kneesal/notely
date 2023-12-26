@@ -19,7 +19,7 @@
       }
     },
     "start": {
-      "command": "nx run-many --target=serve -p our-shopping-list shoppinglist-api --maxParallel=5 "
+      "command": "nx run-many --target=serve -p our-shopping-list shoppinglist-api --maxParallel=2 "
     },
     "serve": {
       "executor": "@nx/next:server",
