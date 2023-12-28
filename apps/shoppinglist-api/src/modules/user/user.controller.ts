@@ -8,17 +8,20 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get('/me')
-  findOne(@Body() id: string): Promise<User> {
-    return this.usersService.findOne(id)
+  findOne(@Body() input: { id: string }): Promise<User> {
+    if (input['id'] == null) throw new Error('id is null or undefined')
+    return this.usersService.findOne(input.id)
   }
 
   @Post('/create-user')
   create(@Body() input: User): Promise<User> {
+    if (input['id'] == null) throw new Error('id is null or undefined')
     return this.usersService.createUser(input)
   }
 
   @Delete('/remove')
   remove(@Body() id: string): Promise<DeleteResult> {
+    if (id['id'] == null) throw new Error('id is null or undefined')
     return this.usersService.remove(id)
   }
 }

@@ -48,7 +48,7 @@ describe('UserController', () => {
   describe('findOne()', () => {
     it('should create get me', async () => {
       usersService.findOne.mockResolvedValueOnce(mockUser)
-      expect(await usersController.findOne('userId')).toEqual(mockUser)
+      expect(await usersController.findOne({ id: 'userId' })).toEqual(mockUser)
       expect(usersService.findOne).toHaveBeenCalledWith('userId')
     })
   })
