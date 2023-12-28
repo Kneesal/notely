@@ -20,7 +20,7 @@ const dbPort = parseInt(process.env.DB_PORT)
       synchronize: true
     }),
     UsersModule
-    //, some modules
+    //add more modules here
   ],
   controllers: [AppController],
   providers: [AppService]

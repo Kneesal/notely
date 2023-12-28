@@ -20,7 +20,7 @@ export function UserAvatar(): ReactElement {
   return (
     <Box>
       <Button onClick={handleClick}>
-        <Avatar src={photoURL as string}></Avatar>
+        <Avatar src={photoURL ?? ''} alt={displayName ?? ''}></Avatar>
       </Button>
 
       <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
