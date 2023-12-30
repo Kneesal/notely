@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing'
 import { UsersService } from './user.service'
 import { UsersController } from './user.controller'
 import { DeleteResult } from 'typeorm'
+import { User } from './user.entity'
 
 describe('UserController', () => {
   let usersController: UsersController
@@ -43,6 +44,12 @@ describe('UserController', () => {
       expect(await usersController.create(mockUser)).toEqual(mockUser)
       expect(usersService.createUser).toHaveBeenCalledWith(mockUser)
     })
+
+    it('should throw an error if user object not passed in', () => {
+      return expect(usersController.create({} as User)).rejects.toThrowError(
+        'id is null or undefined'
+      )
+    })
   })
 
   describe('findOne()', () => {
@@ -58,7 +65,7 @@ describe('UserController', () => {
       usersService.remove.mockResolvedValueOnce(
         mockUser as unknown as DeleteResult
       )
-      expect(await usersService.remove('userId')).toEqual(mockUser)
+      expect(await usersController.remove({ id: 'userId' })).toEqual(mockUser)
       expect(usersService.remove).toHaveBeenCalledWith('userId')
     })
   })

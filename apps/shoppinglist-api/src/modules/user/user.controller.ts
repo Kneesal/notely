@@ -9,19 +9,22 @@ export class UsersController {
 
   @Get('/me')
   findOne(@Body() input: { id: string }): Promise<User> {
-    if (input['id'] == null) throw new Error('id is null or undefined')
+    if (input['id'] == null)
+      return Promise.reject(new Error('id is null or undefined'))
     return this.usersService.findOne(input.id)
   }
 
   @Post('/create-user')
   create(@Body() input: User): Promise<User> {
-    if (input['id'] == null) throw new Error('id is null or undefined')
+    if (input['id'] == null)
+      return Promise.reject(new Error('id is null or undefined'))
     return this.usersService.createUser(input)
   }
 
   @Delete('/remove')
-  remove(@Body() id: string): Promise<DeleteResult> {
-    if (id['id'] == null) throw new Error('id is null or undefined')
-    return this.usersService.remove(id)
+  remove(@Body() input: { id: string }): Promise<DeleteResult> {
+    if (input['id'] == null)
+      return Promise.reject(new Error('id is null or undefined'))
+    return this.usersService.remove(input.id)
   }
 }
