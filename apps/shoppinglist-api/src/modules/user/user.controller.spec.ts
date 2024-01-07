@@ -46,7 +46,7 @@ describe('UserController', () => {
     })
 
     it('should throw an error if user object not passed in', () => {
-      return expect(usersController.create({} as User)).rejects.toThrowError(
+      expect(usersController.create({} as User)).rejects.toThrowError(
         'id is null or undefined'
       )
     })
@@ -67,6 +67,12 @@ describe('UserController', () => {
       )
       expect(await usersController.remove({ id: 'userId' })).toEqual(mockUser)
       expect(usersService.remove).toHaveBeenCalledWith('userId')
+    })
+
+    it('should throw error with null id', () => {
+      expect(usersController.remove({ id: null })).rejects.toThrowError(
+        'id is null or undefined'
+      )
     })
   })
 })
