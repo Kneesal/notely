@@ -58,6 +58,12 @@ describe('UserController', () => {
       expect(await usersController.findOne({ id: 'userId' })).toEqual(mockUser)
       expect(usersService.findOne).toHaveBeenCalledWith('userId')
     })
+
+    it('should test async errors', async () => {
+      await expect(usersController.findOne({ id: undefined })).rejects.toThrow(
+        'id is null or undefined'
+      )
+    })
   })
 
   describe('remove()', () => {
