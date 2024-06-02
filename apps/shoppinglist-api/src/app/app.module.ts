@@ -5,6 +5,7 @@ import { AppService } from './app.service'
 import { User } from '../modules/user/user.entity'
 import { UsersModule } from '../modules/user/user.module'
 import { DataSource } from 'typeorm'
+import { List } from '../modules/list/list.entity'
 
 const dbPort = parseInt(process.env.DB_PORT)
 @Module({
@@ -16,7 +17,7 @@ const dbPort = parseInt(process.env.DB_PORT)
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [User],
+      entities: [User, List],
       synchronize: true
     }),
     UsersModule
