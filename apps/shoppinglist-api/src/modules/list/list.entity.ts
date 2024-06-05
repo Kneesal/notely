@@ -11,6 +11,6 @@ export class List {
   @Column()
   done: boolean
 
-  @UpdateDateColumn
+  @UpdateDateColumn()
   updatedAt: Date
 }
