@@ -6,10 +6,7 @@ export class List {
   id: string
 
   @Column()
-  value: string
-
-  @Column()
-  done: boolean
+  owner: string
 
   @UpdateDateColumn()
   updatedAt: Date
