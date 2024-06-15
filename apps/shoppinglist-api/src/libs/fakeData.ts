@@ -15,21 +15,21 @@ export const list = [
     owner: 'userid',
     editors: ['userId', 'userId2'],
     listItems: [
-      {
-        id: 'listItemId',
-        title: 'bread',
-        done: false
-      },
-      {
-        id: 'listItemId1',
-        title: 'sausages',
-        done: false
-      },
-      {
-        id: 'listItemId2',
-        title: 'tomato',
-        done: false
-      }
+      // {
+      //   id: 'listItemId',
+      //   title: 'bread',
+      //   done: false
+      // },
+      // {
+      //   id: 'listItemId1',
+      //   title: 'sausages',
+      //   done: false
+      // },
+      // {
+      //   id: 'listItemId2',
+      //   title: 'tomato',
+      //   done: false
+      // }
     ]
   }
 ]
